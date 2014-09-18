@@ -3,3 +3,4 @@ Gestage2014
 
 Application de gestion des stages de BTS
 Antoine Richard
+Hugo JEROME
