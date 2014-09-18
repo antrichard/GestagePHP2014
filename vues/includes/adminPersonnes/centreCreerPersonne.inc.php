@@ -18,7 +18,7 @@
             <option value=""></option>
 
             <?php
-            // remplissage du "SELECT" qui contien les roles
+            // remplissage du "SELECT" qui contient les roles
             foreach ($this->lireDonnee('lesRoles') as $role) {
                 echo'<option value="' . $role->getId() . '">' . $role->getLibelle() . '</option>';
             }
@@ -69,7 +69,7 @@
                 <?
 //création du contenu du select pour les spécialités des étudiants
                 foreach ($this->lireDonnee('lesSpecialites') as $spe) {
-                    echo'<option value="' . $spe->getId() . '">' . $spe->getLibelleCourt() . '</option>'; //echo de la ligne 
+                    echo'<option value="' . $spe->getId() . '">' . $spe->getLibellecCourt() . '</option>'; //echo de la ligne 
                 }
                 ?>
             </select>
@@ -108,7 +108,7 @@
 
 
 
-    <!-- Donnée de conection des utilisateur -->
+    <!-- Donnée de connection des utilisateur -->
     <fieldset>
         <legend>Ses identifiants de connexion</legend>
         <label for="login">Login :</label>
