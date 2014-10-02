@@ -29,7 +29,7 @@ class M_DaoSpecialite extends M_DaoGenerique {
         // l'ordre des valeurs est important : il correspond à celui des paramètres de la requête SQL
         $retour = array(
             ':idSpecialite' => $objetMetier->getIdSpecialite(),
-            ':libelleCourt' => $objetMetier->getLibelleCourt(),
+            ':libelleCourt' => $objetMetier->getLibellecCourt(),
             ':libelleLong' => $objetMetier->getLibelleLong()
         );
         return $retour;
