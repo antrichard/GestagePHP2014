@@ -2,7 +2,6 @@
 
 class M_DaoRole extends M_DaoGenerique {
 
-
     function __construct() {
         $this->nomTable = "ROLE";
         $this->nomClefPrimaire = "IDROLE";
@@ -43,6 +42,23 @@ class M_DaoRole extends M_DaoGenerique {
         return FALSE;
     }
 
+    public function selectOne($idRole) {
+        $retour = null;
+        try {
+            //requete
+            $sql = "SELECT * FROM $this->nomTable WHERE idrole=" . $idRole;
+            //préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+            //execution de la  requete
+            if ($queryPrepare->execute(array(':id' => $idRole))) {
+                // si la requete marche
+                $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
+                $retour = $this->enregistrementVersObjet($enregistrement);
+            }
+        } catch (Exception $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }
+
 }
-
-
