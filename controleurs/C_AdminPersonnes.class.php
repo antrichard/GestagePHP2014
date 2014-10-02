@@ -64,7 +64,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         $specialite = new M_Specialite(null, null, null);
         
         $idSpecialite = $_POST['option'];
-        
+       
         $daoSpecialite = new M_DaoSpecialite();
         $daoSpecialite->connecter();
         $pdo = $daoSpecialite->getPdo();
@@ -80,7 +80,7 @@ class C_AdminPersonnes extends C_ControleurGenerique {
         $daoPers->insert($unePersonne);
         
         if($daoPers) {
-            $this->vue->ecrireDonnee('centre', "../vues/utilisateur/centreValiderCreationPersonne.php");
+            $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreValiderCreationPersonne.php");
         }else{
             echo 'coucou2';
         }

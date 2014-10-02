@@ -48,6 +48,7 @@ class M_DaoSpecialite extends M_DaoGenerique {
             //requete
             $sql = "SELECT * FROM $this->nomTable WHERE idspecialite=" . $idSpecialite;
             //préparer la requête PDO
+            
             $queryPrepare = $this->pdo->prepare($sql);
             //execution de la  requete
             if ($queryPrepare->execute(array(':id' => $idSpecialite))) {
