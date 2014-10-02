@@ -32,9 +32,9 @@
 
     <!-- Données valables pour tous les rôles -->
     <fieldset>
-        <legend>Ses informations g&eacute;n&eacute;rales</legend>
+        <legend>Ses informations générales</legend>
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
-        <label for="civilite">Civilit&eacute; :</label>
+        <label for="civilite">Civilité; :</label>
 
         <select type="select" name="civilite" id="civilite">
             <option>Madame</option>
@@ -42,7 +42,7 @@
         </select>
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom"></input><br/>
-        <label for="prenom">Pr&eacute;nom :</label>
+        <label for="prenom">Prénom :</label>
         <input type="prenom" name="prenom" id="prenom"></input><br/>
         <label for="mail">E-Mail :</label>
         <input type="text" name="mail" id="mail"></input><br/>

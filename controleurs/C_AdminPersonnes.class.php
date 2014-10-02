@@ -33,8 +33,58 @@ class C_AdminPersonnes extends C_ControleurGenerique {
     }
     
     //validation de création d'utilisateur 
-    function validationcreerPersonne(){
+    function validationcreerPersonne() {
+        $this->vue = new V_Vue("../vues/templates/template.inc.php");
+        $this->vue->ecrireDonnee('titreVue', "Validation de la création d'une personne");
+
+        //var_dump($_POST);
+
+        $idRole = $_POST['role'];
         
+        $role = new M_Role(null, null, null);
+                
+        $daoRole = new M_DaoRole();
+        $daoRole->connecter();
+        $pdo = $daoRole->getPdo();
+        $role=$daoRole->selectOne($idRole);
+        
+        
+        $civilite = $_POST['civilite'];
+        $nom = $_POST['nom'];
+        $prenom = $_POST['prenom'];
+        $mail = $_POST['mail'];
+        $numTel = $_POST['tel'];
+        $mobile = $_POST['telP'];
+        $etudes = $_POST['etudes'];
+        $formation = $_POST['formation'];
+        
+        $login = $_POST['login'];
+        $mdp = sha1($_POST['mdp']);
+        
+        $specialite = new M_Specialite(null, null, null);
+        
+        $idSpecialite = $_POST['option'];
+        
+        $daoSpecialite = new M_DaoSpecialite();
+        $daoSpecialite->connecter();
+        $pdo = $daoSpecialite->getPdo();
+        $specialite=$daoSpecialite->selectOne($idSpecialite);
+        
+        $unePersonne = new M_Personne(null, $specialite, $role, $civilite, $nom, $prenom, $numTel, $mail, $mobile, $etudes, $formation, $login, $mdp);
+        
+        
+        $daoPers = new M_DaoPersonne();
+        $daoPers->connecter();
+        $pdo = $daoPers->getPdo();
+        //var_dump($unePersonne);
+        $daoPers->insert($unePersonne);
+        
+        if($daoPers) {
+            $this->vue->ecrireDonnee('centre', "../vues/utilisateur/centreValiderCreationPersonne.php");
+        }else{
+            echo 'coucou2';
+        }
+        $this->vue->afficher();
     }
     
 }
