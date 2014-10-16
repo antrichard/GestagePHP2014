@@ -47,7 +47,7 @@ $specialite = $daoSpecialite->selectOne($idSpecialite);
 
 
 <fieldset>
-    <legend>Mes informations</legend>
+    <legend>Ses informations</legend>
     <label for="civilite">Civilité :</label>
     <input type="text" readonly="readonly" name="civilite" id="civilite" value="<?php echo $civilite ?>"></input><br/>
     <label for="nom">Nom :</label>
@@ -64,7 +64,7 @@ $specialite = $daoSpecialite->selectOne($idSpecialite);
 
 
 <fieldset>
-    <legend>Informations specifiques aux étudiant</legend>
+    <legend>Informations spécifiques à l'étudiant</legend>
     <label for="etudes">Etudes :</label>
     <input type="text" readonly="readonly" name="etudes" id="etudes" value="<?php echo $etudes ?>"></input><br/>
     <label for="formation">Formation :</label>
