@@ -60,7 +60,7 @@ class M_DaoPersonne extends M_DaoGenerique {
             ':formation' => $objetMetier->getFormation(),
             ':login' => $objetMetier->getLogin(),
             ':mdp' => $objetMetier->getMdp(),
-            ':specialite' => $objetMetier->getSpecialite()->getId()
+            ':specialite' => $objetMetier->getSpecialite()->getId()   //permet de récupérer l'ID de la spếcialité choisie
         );
         return $retour;
     }
@@ -231,5 +231,3 @@ class M_DaoPersonne extends M_DaoGenerique {
     }
 
 }
-
-

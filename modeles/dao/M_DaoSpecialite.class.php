@@ -42,6 +42,12 @@ class M_DaoSpecialite extends M_DaoGenerique {
         return FALSE;
     }
 
+    /**
+     * Retourne toutes les données en rapport avec l'ID de la spécialité en paramètre
+     * @param type $idSpecialite
+     * @return array $retour
+     */
+    
     public function selectOne($idSpecialite) {
         $retour = null;
         try {

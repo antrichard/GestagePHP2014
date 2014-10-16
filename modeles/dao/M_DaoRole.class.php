@@ -42,6 +42,11 @@ class M_DaoRole extends M_DaoGenerique {
         return FALSE;
     }
 
+    /**
+     * Retourne toutes les données en rapport avec l'ID du rôle en paramètre
+     * @param type $idRole
+     * @return array $retour
+     */
     public function selectOne($idRole) {
         $retour = null;
         try {
