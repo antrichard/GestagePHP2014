@@ -14,7 +14,7 @@ class M_DaoPersonne extends M_DaoGenerique {
      * @return objet :  instance de la classe métier, initialisée d'après les valeurs de l'enregistrement 
      */
     public function enregistrementVersObjet($enreg) {
-        // on instancie les objets Role et Specialite s'il y a lieu
+// on instancie les objets Role et Specialite s'il y a lieu
         $leRole = null;
         if (isset($enreg['LIBELLE'])) {
             $daoRole = new M_DaoRole();
@@ -27,7 +27,7 @@ class M_DaoPersonne extends M_DaoGenerique {
             $daoSpe->setPdo($this->pdo);
             $laSpecialite = $daoSpe->getOneById($enreg['IDSPECIALITE']);
         }
-        // on construit l'objet Personne 
+// on construit l'objet Personne 
         $retour = new M_Personne(
                 $enreg['IDPERSONNE'], $laSpecialite, $leRole, $enreg['CIVILITE'], $enreg['NOM'], $enreg['PRENOM'], $enreg['NUM_TEL'], $enreg['ADRESSE_MAIL'], $enreg['NUM_TEL_MOBILE'], $enreg['ETUDES'], $enreg['FORMATION'], $enreg['LOGINUTILISATEUR'], $enreg['MDPUTILISATEUR']
         );
@@ -40,9 +40,9 @@ class M_DaoPersonne extends M_DaoGenerique {
      * @return array : tableau ordonné de valeurs
      */
     public function objetVersEnregistrement($objetMetier) {
-        // construire un tableau des paramètres d'insertion ou de modification
-        // l'ordre des valeurs est important : il correspond à celui des paramètres de la requête SQL
-        // le rôle et la spécialité seront mis à jour séparément
+// construire un tableau des paramètres d'insertion ou de modification
+// l'ordre des valeurs est important : il correspond à celui des paramètres de la requête SQL
+// le rôle et la spécialité seront mis à jour séparément
         if (!is_null($objetMetier->getRole())) {
             $idRole = $objetMetier->getRole()->getId();
         } else {
@@ -72,23 +72,53 @@ class M_DaoPersonne extends M_DaoGenerique {
     function getAll() {
         echo "--- getAll redéfini ---<br/>";
         $retour = null;
-        // Requête textuelle
+// Requête textuelle
         $sql = "SELECT * FROM $this->nomTable P ";
         $sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
         $sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE ";
         try {
+// préparer la requête PDO
+            $queryPrepare = $this->pdo->prepare($sql);
+// exécuter la requête PDO
+            if ($queryPrepare->execute()) {
+// si la requête réussit :
+// initialiser le tableau d'objets à retourner
+                $retour = array();
+// pour chaque enregistrement retourné par la requête
+                while ($enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC)) {
+// construir un objet métier correspondant
+                    $unObjetMetier = $this->enregistrementVersObjet($enregistrement);
+// ajouter l'objet au tableau
+                    $retour[] = $unObjetMetier;
+                }
+            }
+        } catch (PDOException $e) {
+            echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
+        }
+        return $retour;
+    }
+
+// eager-fetching
+    function getAllByRole($idrole) {
+        $retour = null;
+        try {
+// Requête textuelle
+            $sql = "SELECT * FROM PERSONNE";
+            //$sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
+            //$sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE ";
+            $sql .= " WHERE IDROLE = ?";
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
-            // exécuter la requête PDO
-            if ($queryPrepare->execute()) {
-                // si la requête réussit :
-                // initialiser le tableau d'objets à retourner
+            // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
+            if ($queryPrepare->execute(array($idrole))) {
+// si la requête réussit :
+// initialiser le tableau d'objets à retourner
                 $retour = array();
-                // pour chaque enregistrement retourné par la requête
+// pour chaque enregistrement retourné par la requête
                 while ($enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC)) {
-                    // construir un objet métier correspondant
+// construir un objet métier correspondant
                     $unObjetMetier = $this->enregistrementVersObjet($enregistrement);
-                    // ajouter l'objet au tableau
+// ajouter l'objet au tableau
                     $retour[] = $unObjetMetier;
                 }
             }
@@ -157,7 +187,7 @@ class M_DaoPersonne extends M_DaoGenerique {
     function verifierLogin($login, $mdp) {
         $retour = null;
         try {
-            $sql = "SELECT * FROM $this->nomTable WHERE LOGINUTILISATEUR=:login AND MDPUTILISATEUR=:mdp";
+            $sql = "SELECT * FROM $this->nomTable WHERE LOGINUTILISATEUR = :login AND MDPUTILISATEUR = :mdp";
             $stmt = $this->pdo->prepare($sql);
             if ($stmt->execute(array(':login' => $login, ':mdp' => sha1($mdp)))) {
                 $retour = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -178,8 +208,8 @@ class M_DaoPersonne extends M_DaoGenerique {
         try {
             // Requête textuelle paramétrée (paramètres nommés)
             $sql = "INSERT INTO $this->nomTable (";
-            $sql .= "IDSPECIALITE, CIVILITE,IDROLE,NOM,PRENOM,NUM_TEL,ADRESSE_MAIL,NUM_TEL_MOBILE,";
-            $sql .= "ETUDES,FORMATION,LOGINUTILISATEUR,MDPUTILISATEUR)  ";
+            $sql .= "IDSPECIALITE, CIVILITE, IDROLE, NOM, PRENOM, NUM_TEL, ADRESSE_MAIL, NUM_TEL_MOBILE, ";
+            $sql .= "ETUDES, FORMATION, LOGINUTILISATEUR, MDPUTILISATEUR) ";
             $sql .= "VALUES (";
             $sql .= ":specialite, :civilite, :idRole, :nom, :prenom, :numTel, :mail, :mobile, ";
             $sql .= ":etudes, :formation, :login, :mdp)";
@@ -202,16 +232,16 @@ class M_DaoPersonne extends M_DaoGenerique {
         try {
             // Requête textuelle paramétrée (paramètres nommés)
             $sql = "UPDATE $this->nomTable SET ";
-            $sql .= "IDROLE = :idRole , ";
-            $sql .= "CIVILITE = :civilite , ";
-            $sql .= "NOM = :nom , ";
-            $sql .= "PRENOM = :prenom , ";
-            $sql .= "NUM_TEL = :numTel , ";
-            $sql .= "ADRESSE_MAIL = :mail , ";
-            $sql .= "NUM_TEL_MOBILE = :mobile , ";
-            $sql .= "ETUDES = :etudes , ";
-            $sql .= "FORMATION = :formation , ";
-            $sql .= "LOGINUTILISATEUR = :login , ";
+            $sql .= "IDROLE = :idRole, ";
+            $sql .= "CIVILITE = :civilite, ";
+            $sql .= "NOM = :nom, ";
+            $sql .= "PRENOM = :prenom, ";
+            $sql .= "NUM_TEL = :numTel, ";
+            $sql .= "ADRESSE_MAIL = :mail, ";
+            $sql .= "NUM_TEL_MOBILE = :mobile, ";
+            $sql .= "ETUDES = :etudes, ";
+            $sql .= "FORMATION = :formation, ";
+            $sql .= "LOGINUTILISATEUR = :login, ";
             $sql .= "MDPUTILISATEUR = :mdp ";
             $sql .= "WHERE IDPERSONNE = :id";
 //            var_dump($sql);

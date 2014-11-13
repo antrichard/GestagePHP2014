@@ -6,21 +6,21 @@
 <!-- VARIABLES NECESSAIRES -->
 
 <!-- $this->message : à afficher sous le formulaire -->
-<form method="post" action=".?controleur=AdminPersonnes&action=validationCreerPersonne" name="CreateUser">
+<form method="post" action=".?controleur=Utilisateur&action=validationAjoutStage" name="AjoutStage">
     <h1>Ajouter un Stage (à modifier)</h1>
     <!-- Choix du type de compte pour afficher les différentes informations pour créer un compte spécifique -->
     <fieldset>
 
-        <legend>Type de compte</legend>
+        <legend>Informations générales</legend>
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
-        <label for="role">Rôle :</label>
-        <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
+        <label for="role">Etudiant :</label>
+        <select type="select"  name="eleve" id="eleve">
             <option value=""></option>
 
             <?php
-            // remplissage du "SELECT" qui contient les roles
-            foreach ($this->lireDonnee('lesRoles') as $role) {
-                echo'<option value="' . $role->getId() . '">' . $role->getLibelle() . '</option>';
+            // remplissage du "SELECT" qui contient les élèves
+            foreach ($this->lireDonnee('lesEleves') as $eleve) {
+                echo'<option value="' . $eleve->getId() . '">' . $eleve->getNom() . ' ' . $eleve->getPrenom() . '</option>';
             }
             ?>  
         </select>
@@ -30,9 +30,9 @@
 
 
 
-    <!-- Données valables pour tous les rôles -->
+<!--     Données valables pour tous les rôles 
     <fieldset>
-        <legend>Ses informations générales</legend>
+        <legend>Ses Informations générales</legend>
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
         <label for="civilite">Civilité; :</label>
 
@@ -52,7 +52,7 @@
         <input type="text" name="telP" id="telP"></input><br/>
     </fieldset>
 
-    <!-- Information nécessaire uniquement aux étudiants -->
+     Information nécessaire uniquement aux étudiants 
 
     <div id="Formulaire_Etudiant" style="display:none" height="0">
         <fieldset>
@@ -82,14 +82,14 @@
 
 
 
-    <!-- Information nécessaire uniquement aux maitre de stage -->
+     Information nécessaire uniquement aux maitre de stage 
 
     <div id="Formulaire_MaitreStage" style="display:none" height="0">
         <fieldset>
             <legend>Choisir l'entreprise :</legend>
 
             <label for="login">Entreprise :</label>
-            <select type ="select" name="entreprise1" id="entreprise1"><!--selecte de choix d'entreprise-->
+            <select type ="select" name="entreprise1" id="entreprise1">selecte de choix d'entreprise
                 <option value=""></option>
 
                 <?php
@@ -108,17 +108,17 @@
 
 
 
-    <!-- Donnée de connection des utilisateur -->
+     Donnée de connection des utilisateur 
     <fieldset>
         <legend>Ses identifiants de connexion</legend>
         <label for="login">Login :</label>
         <input type="text" name="login" id="login"></input><br/>
         <label for="mdp">Mot de passe :</label>
         <input type="password" name="mdp" id="mdp"></input><br/>
-        <label for="mdp2">Retaper le mot de passe :</label>  <!-- vérification de mots de passe -->
+        <label for="mdp2">Retaper le mot de passe :</label>   vérification de mots de passe 
         <input type="password" name="mdp2" id="mdp2"></input><br/>
 
-    </fieldset>
+    </fieldset>-->
     <fieldset>
         <input type="submit" value="Creer" onclick="return valider()"></input><!-- OnClick éxécutera le JS qui testera tout les champ du formulaire. -->
         <input type="button" value="Retour" onclick="history.go(-1)">

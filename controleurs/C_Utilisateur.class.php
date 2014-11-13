@@ -44,7 +44,7 @@ class C_Utilisateur extends C_ControleurGenerique {
     function validerModifierCoordonnees() {
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
         $this->vue->ecrireDonnee('titreVue', "Modification de vos informations");
-        $this->vue->ecrireDonnee('centre',"../vues/includes/utilisateur/centreValiderModifierMesInformations.inc.php");
+        $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreValiderModifierMesInformations.inc.php");
         $daoPers = new M_DaoPersonne();
         $daoPers->connecter();
         // récupérer les données du formulaire l'identifiant de l'utilisateur courant
@@ -66,34 +66,40 @@ class C_Utilisateur extends C_ControleurGenerique {
         }
         $ok = $daoPers->update($id, $utilisateur);
         if ($ok) {
-            $this->vue->ecrireDonnee('message',"Modifications enregistr&eacute;es");
+            $this->vue->ecrireDonnee('message', "Modifications enregistr&eacute;es");
         } else {
-            $this->vue->ecrireDonnee('message',"Echec des modifications");
+            $this->vue->ecrireDonnee('message', "Echec des modifications");
         }
         $this->vue->afficher();
     }
-    
-    
-        
+
     function ajoutStage() {
         $this->vue = new V_Vue("../vues/templates/template.inc.php");
         $this->vue->ecrireDonnee('titreVue', 'Ajouter un stage');
         // ... depuis la BDD       
         $daoPers = new M_DaoPersonne();
         $daoPers->connecter();
-        $pdo = $daoPers->getPdo();
+        $eleve = $daoPers->getAllByRole('4');
 
-        // Mémoriser la liste des stages disponibles
-        $daoRole = new M_DaoRole();
-        $daoRole->setPdo($pdo);
-        $this->vue->ecrireDonnee('lesRoles', $daoRole->getAll());
+        //$daoPers->setPdo($pdo);
+        $this->vue->ecrireDonnee('lesEleves', $eleve);
+
+//        // Mémoriser la liste des spécialités disponibles
+//        $daoSpecialite = new M_DaoSpecialite();
+//        $daoSpecialite->setPdo($pdo);
+//        $this->vue->ecrireDonnee('lesSpecialites', $daoSpecialite->getAll());
+//
+//        // Mémoriser la liste des rôles disponibles
+//        $daoRole = new M_DaoRole();
+//        $daoRole->setPdo($pdo);
+//        $this->vue->ecrireDonnee('lesRoles', $daoRole->getAll());
 
         $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
         $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreAjouterStage.inc.php");
 
         $this->vue->afficher();
     }
-    
+
 }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-class M_DaoPersonne extends M_DaoGenerique {
+class M_DaoStage extends M_DaoGenerique {
 
     function __construct() {
         $this->nomTable = "STAGE";
