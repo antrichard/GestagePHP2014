@@ -51,7 +51,7 @@
         <input type="text" name="divers" id="divers"></input><br/>
     </fieldset>
 
-    
+
     <fieldset>
         <legend>Suivi</legend>
         <label for="professeur">Professeur :</label>
