@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
+    $( ".datepicker" ).datepicker();
   });
 </script>
 
@@ -50,9 +50,9 @@
         <label for="ville">Ville :</label>
         <input type="text" name="ville" id="ville"></input><br/>
         <label for="datedebut">Date debut :</label>
-        <input type="text" id="datepicker">
+        <input type="text" class="datepicker">
         <label for="datefin">Date fin :</label>
-        <input type="text" id="datepicker">
+        <input type="text" class="datepicker">
         <label for="divers">Divers :</label>
         <input type="text" name="divers" id="divers"></input><br/>
     </fieldset>
