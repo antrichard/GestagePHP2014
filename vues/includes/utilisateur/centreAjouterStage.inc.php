@@ -1,82 +1,83 @@
 <script language="JavaScript" type="text/javascript" src="../vues/javascript/fonctionsJavascript.inc.js"></script>
 <script language="JavaScript" type="text/javascript" src="../bibliotheques/jquery.js"></script>
 <script language="JavaScript" type="text/javascript" src=".../vues/javascript/ajax.inc.js"></script>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+</script>
 
 <!-- VARIABLES NECESSAIRES -->
 
 <!-- $this->message : à afficher sous le formulaire -->
 <form method="post" action=".?controleur=AdminPersonnes&action=validationCreerPersonne" name="CreateUser">
-    <h1>Ajouter un Stage (à modifier)</h1>
+    <h1>Ajouter un Stage</h1>
     <!-- Choix du type de compte pour afficher les différentes informations pour créer un compte spécifique -->
-    <fieldset>
+<!--    <fieldset>
 
-        <legend>Type de compte</legend>
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
-        <label for="role">Rôle :</label>
+        <label for="libelle">Libellé :</label>
+        <input type="text" name="nom" id="nom"></input><br/>
+
+    </fieldset>-->
+
+
+
+
+    <fieldset>
+        <legend>informations étudiant</legend>
+        <input type="hidden" readonly="readonly" name="id" id="id"></input>
+        <label for="etudiant">Etudiant :</label>
         <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
             <option value=""></option>
-
-            <?php
-            // remplissage du "SELECT" qui contient les roles
-            foreach ($this->lireDonnee('lesRoles') as $role) {
-                echo'<option value="' . $role->getId() . '">' . $role->getLibelle() . '</option>';
-            }
-            ?>  
         </select>
-
     </fieldset>
-
-
-
-
-    <!-- Données valables pour tous les rôles -->
+    
     <fieldset>
-        <legend>Ses informations générales</legend>
-        <input type="hidden" readonly="readonly" name="id" id="id"></input>
-        <label for="civilite">Civilité; :</label>
-
-        <select type="select" name="civilite" id="civilite">
-            <option>Madame</option>
-            <option>Monsieur</option>
+        <legend>informations stage</legend>
+        <label for="organisation">Organisation :</label>
+        <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
+        <option value=""></option>
         </select>
-        <label for="nom">Nom :</label>
-        <input type="text" name="nom" id="nom"></input><br/>
-        <label for="prenom">Prénom :</label>
-        <input type="prenom" name="prenom" id="prenom"></input><br/>
-        <label for="mail">E-Mail :</label>
-        <input type="text" name="mail" id="mail"></input><br/>
-        <label for="tel">Tel :</label>
-        <input type="text" name="tel" id="tel"></input><br/>
-        <label for="tel">Tel portable:</label>
-        <input type="text" name="telP" id="telP"></input><br/>
+        <label for="maitrestage">Maitre de stage :</label>
+        <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
+        <option value=""></option>
+        </select>
+        <label for="ville">Ville :</label>
+        <input type="text" name="ville" id="ville"></input><br/>
+        <label for="datedebut">Date debut :</label>
+        <input type="text" id="datepicker">
+        <label for="datefin">Date fin :</label>
+        <input type="text" id="datepicker">
+        <label for="divers">Divers :</label>
+        <input type="text" name="divers" id="divers"></input><br/>
     </fieldset>
 
-    <!-- Information nécessaire uniquement aux étudiants -->
+       <fieldset>
+        <legend>informations étudiant</legend>
+        <input type="hidden" readonly="readonly" name="id" id="id"></input>
+        <label for="etudiant">Etudiant :</label>
+        <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
+            <option value=""></option>
+        </select>
+    </fieldset>
+    
+    <fieldset>
+        <legend>Suivi</legend>
+        <label for="professeur">Professeur :</label>
+        <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
+        <option value=""></option>
+        </select>
+        <label for="datevisite">Date visite :</label>
+        <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
+        <option value=""></option>
+        </select>
+    </fieldset>
 
-    <div id="Formulaire_Etudiant" style="display:none" height="0">
-        <fieldset>
-            <legend>Informations specifiques aux étudiant</legend>
-
-
-            <label for="etudes">Etudes :</label>
-            <input type="text" name="etudes" id="etudes"></input><br/>
-            <label for="formation">Formation :</label>
-            <input type="text" name="formation" id="formation"></input><br/>
-            <label for="option">Specialité :</label>
-            <select name ="option" id="option">
-                <option value=""></option>
-                <?
-//création du contenu du select pour les spécialités des étudiants
-                foreach ($this->lireDonnee('lesSpecialites') as $spe) {
-                    echo'<option value="' . $spe->getId() . '">' . $spe->getLibellecCourt() . '</option>'; //echo de la ligne 
-                }
-                ?>
-            </select>
-
-        </fieldset>
-
-    </div>
 
 
 
@@ -104,21 +105,6 @@
 
     </div>
 
-
-
-
-
-    <!-- Donnée de connection des utilisateur -->
-    <fieldset>
-        <legend>Ses identifiants de connexion</legend>
-        <label for="login">Login :</label>
-        <input type="text" name="login" id="login"></input><br/>
-        <label for="mdp">Mot de passe :</label>
-        <input type="password" name="mdp" id="mdp"></input><br/>
-        <label for="mdp2">Retaper le mot de passe :</label>  <!-- vérification de mots de passe -->
-        <input type="password" name="mdp2" id="mdp2"></input><br/>
-
-    </fieldset>
     <fieldset>
         <input type="submit" value="Creer" onclick="return valider()"></input><!-- OnClick éxécutera le JS qui testera tout les champ du formulaire. -->
         <input type="button" value="Retour" onclick="history.go(-1)">
