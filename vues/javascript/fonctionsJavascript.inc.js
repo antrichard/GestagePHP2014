@@ -21,7 +21,7 @@ function choixRole() {
             break;
         case "5" : //MaitreDeStage
             $monDiv1.style.display = 'block';
-//            $monDiv1.style.height = "100%";
+            $monDiv1.style.height = "70px";
             $monDiv.style.display = 'none';
             break;
         default://laisse les option caché pour tout autres utilisateur
@@ -30,8 +30,33 @@ function choixRole() {
     }
 }
 
+//fonction de choix de roles
+function choixEtudiant() {
+    $monDiv1 = document.getElementById('Formulaire_MaitreStage');
+    $monDiv = document.getElementById('Formulaire_Etudiant');
+    $monSelect = document.getElementById('etudiant');//récupération de la valeur du roles
+    //formulaire qui sera modifier par la fonction
+    $monDiv.style.display= 'none';
+    $monDiv.style.height = "0";
+    $monDiv1.style.display= 'none';
+    $monDiv1.style.height = "0";
 
-
+    switch ($monSelect.value) { // 4 : Etudiant ; 5 : Maître de stage
+        case "4" ://Etudiant
+            $monDiv.style.display = 'block';
+            $monDiv.style.height = "150px";
+//            $monDiv1.style.display = 'none';
+            break;
+        case "5" : //MaitreDeStage
+            $monDiv1.style.display = 'block';
+//            $monDiv1.style.height = "100%";
+            $monDiv.style.display = 'none';
+            break;
+        default://laisse les option caché pour tout autres utilisateur
+            $monDiv.style.display = 'none';
+//            $monDiv1.style.display = 'none';
+    }
+}
 
 
 // validation création utilisateur
