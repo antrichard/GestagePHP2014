@@ -57,15 +57,6 @@
         <input type="text" name="divers" id="divers"></input><br/>
     </fieldset>
 
-       <fieldset>
-        <legend>informations étudiant</legend>
-        <input type="hidden" readonly="readonly" name="id" id="id"></input>
-        <label for="etudiant">Etudiant :</label>
-        <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
-            <option value=""></option>
-        </select>
-    </fieldset>
-    
     <fieldset>
         <legend>Suivi</legend>
         <label for="professeur">Professeur :</label>
