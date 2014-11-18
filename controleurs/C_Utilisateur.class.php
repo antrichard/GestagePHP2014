@@ -86,8 +86,10 @@ class C_Utilisateur extends C_ControleurGenerique {
         
         
         $daoOrga = new M_DaoOrganisation();
-        $daoOrga->setPdo($pdo);
-        $this->vue->ecrireDonnee('lesOrganisations', $daoOrga->getAll());
+        $daoOrga->connecter();
+        $organisation = $daoOrga->getAll();
+
+        $this->vue->ecrireDonnee('lesOrganisations', $organisation);
 
 
 //        // Mémoriser la liste des spécialités disponibles
