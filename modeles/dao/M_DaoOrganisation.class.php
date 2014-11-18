@@ -1,6 +1,6 @@
 <?php
 
-class M_DaoRole extends M_DaoGenerique {
+class M_DaoOrganisation extends M_DaoGenerique {
 
     function __construct() {
         $this->nomTable = "ORGANISATION";
@@ -17,6 +17,7 @@ class M_DaoRole extends M_DaoGenerique {
         $retour = new M_Organisation($enreg['IDORGANISATION'], $enreg['NOM_ORGANISATION'], $enreg['VILLE_ORGANISATION'], $enreg['ADRESSE_ORGANISATION'], $enreg['CP_ORGANISATION'], $enreg['TEL_ORGANISATION'], $enreg['FAX_ORGANISATION'], $enreg['FORMEJURIDIQUE'], $enreg['ACTIVITE']);
         return $retour;
     }
+
 
     /**
      * Prépare une liste de paramètres pour une requête SQL UPDATE ou INSERT

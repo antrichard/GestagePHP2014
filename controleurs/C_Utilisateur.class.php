@@ -83,6 +83,12 @@ class C_Utilisateur extends C_ControleurGenerique {
 
         //$daoPers->setPdo($pdo);
         $this->vue->ecrireDonnee('lesEleves', $eleve);
+        
+        
+        $daoOrga = new M_DaoOrganisation();
+        $daoOrga->setPdo($pdo);
+        $this->vue->ecrireDonnee('lesOrganisations', $daoOrga->getAll());
+
 
 //        // Mémoriser la liste des spécialités disponibles
 //        $daoSpecialite = new M_DaoSpecialite();

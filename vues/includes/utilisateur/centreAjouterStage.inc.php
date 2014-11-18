@@ -34,8 +34,15 @@
 <fieldset>
         <legend>informations stage</legend>
         <label for="organisation">Organisation :</label>
-        <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
-        <option value=""></option>
+        <select name="organisation" id="organisation">
+            <option value=""></option>
+
+            <?php
+            // remplissage du "SELECT" qui contient les organisations
+            foreach ($this->lireDonnee('lesOrganisations') as $organisation) {
+                echo'<option value="' . $organisation->getId() . '">' . $organisation->getNom() . '</option>';
+            }
+            ?>
         </select>
         <label for="maitrestage">Maitre de stage :</label>
         <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
