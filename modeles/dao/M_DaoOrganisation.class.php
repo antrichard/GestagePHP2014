@@ -73,7 +73,6 @@ class M_DaoOrganisation extends M_DaoGenerique {
         return $retour;
     }
     function getAll() {
-        echo "--- getAll redéfini ---<br/>";
         $retour = null;
 // Requête textuelle
         $sql = "SELECT * FROM $this->nomTable O ";
