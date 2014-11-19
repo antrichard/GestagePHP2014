@@ -5,19 +5,19 @@
  * @author btssio
  */
 class M_Personne {
-    private $id;
-    private $role;          // objet Role
-    private $specialite;    // objet Specialite
-    private $civilite;
-    private $nom;
-    private $prenom;
-    private $numTel;
-    private $mail;
-    private $mobile;
-    private $etudes;
-    private $formation;
-    private $login;
-    private $mdp;
+    private $id; //type : int
+    private $role; //objet Role
+    private $specialite; //objet Specialite
+    private $civilite; //type : String
+    private $nom; //type : String
+    private $prenom; //type : String
+    private $numTel; //type : String
+    private $mail; //type : String
+    private $mobile; //type : String
+    private $etudes; //type : String
+    private $formation; //type : String
+    private $login; //type : String
+    private $mdp; //type : String encodé en sha1
 
     function __construct($id, $specialite, $role, $civilite, $nom, $prenom, $numTel, $mail, $mobile, $etudes, $formation, $login, $mdp) {
         $this->id = $id;

@@ -14,6 +14,7 @@ class M_DaoSpecialite extends M_DaoGenerique {
      * @return objet :  instance de la classe métier, initialisée d'après les valeurs de l'enregistrement 
      */
     public function enregistrementVersObjet($enreg) {
+        //on construit l'objet Specialite
         $retour = new M_Specialite($enreg['IDSPECIALITE'], $enreg['LIBELLECOURTSPECIALITE'], $enreg['LIBELLELONGSPECIALITE']);
         return $retour;
     }
@@ -46,8 +47,7 @@ class M_DaoSpecialite extends M_DaoGenerique {
      * Retourne toutes les données en rapport avec l'ID de la spécialité en paramètre
      * @param type $idSpecialite
      * @return array $retour
-     */
-    
+     */    
     public function selectOne($idSpecialite) {
         $retour = null;
         try {

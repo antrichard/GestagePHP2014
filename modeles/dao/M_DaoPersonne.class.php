@@ -98,29 +98,27 @@ class M_DaoPersonne extends M_DaoGenerique {
         return $retour;
     }
 
-// eager-fetching
+    /**
+     * Lire tous les enregistrements de table par le role insérer en paramètre
+     * @return tableau-associatif d'objets : un tableau d'instances de la classe métier
+     */
     function getAllByRole($idrole) {
         $retour = null;
         try {
-// Requête textuelle
-            $sql = "SELECT * FROM PERSONNE";
-            //$sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
-            //$sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE ";
-            $sql .= " WHERE IDROLE = ?";
+            // Requête textuelle
+            $sql = "SELECT * FROM $this->nomTable P ";
+            $sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
+            $sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE ";
+            $sql .= "WHERE IDROLE = :role";
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
-            if ($queryPrepare->execute(array($idrole))) {
-// si la requête réussit :
-// initialiser le tableau d'objets à retourner
-                $retour = array();
-// pour chaque enregistrement retourné par la requête
-                while ($enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC)) {
-// construir un objet métier correspondant
-                    $unObjetMetier = $this->enregistrementVersObjet($enregistrement);
-// ajouter l'objet au tableau
-                    $retour[] = $unObjetMetier;
-                }
+            if ($queryPrepare->execute(array(':role' => $idrole))) {
+                // si la requête réussit :
+                // extraire l'enregistrement retourné par la requête
+                $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
+                // construire l'objet métier correspondant
+                $retour = $this->enregistrementVersObjet($enregistrement);
             }
         } catch (PDOException $e) {
             echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
@@ -128,7 +126,7 @@ class M_DaoPersonne extends M_DaoGenerique {
         return $retour;
     }
 
-    // eager-fetching
+    // Lire un enregistrement d'une table par son id mis en paramètre
     function getOneById($id) {
         $retour = null;
         try {
@@ -153,7 +151,7 @@ class M_DaoPersonne extends M_DaoGenerique {
         return $retour;
     }
 
-    // eager-fetching
+    // Lire un enregistrement d'une table par son login mis en paramètre
     function getOneByLogin($valeurLogin) {
         $retour = null;
         try {
@@ -200,7 +198,7 @@ class M_DaoPersonne extends M_DaoGenerique {
 
     /**
      * suppression
-     * @param type $idMetier
+     * @param type $objetMetier
      * @return boolean Cette fonction retourne TRUE en cas de succès ou FALSE si une erreur survient.
      */
     function insert($objetMetier) {

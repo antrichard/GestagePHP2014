@@ -8,14 +8,14 @@
 class M_Organisation {
 
     private $id; // type : int
-    private $nom; // type : chaîne de caractères
-    private $ville; //type : chaîne de caractères
-    private $adresse; //type : chaîne de caractères
-    private $cp; //type : chaîne de caractères
-    private $tel; //type : chaîne de caractères
-    private $fax; //type : chaîne de caractères
-    private $formeJuridique; //type : chaîne de caractères
-    private $activite; //type : chaîne de caractères
+    private $nom; // type : String
+    private $ville; //type : String
+    private $adresse; //type : String
+    private $cp; //type : String
+    private $tel; //type : String
+    private $fax; //type : String
+    private $formeJuridique; //type : String
+    private $activite; //type : String
 
     function __construct($id, $nom, $ville, $adresse, $cp, $tel, $fax, $formeJuridique, $activite) {
         $this->id = $id;

@@ -14,7 +14,7 @@ class M_DaoStage extends M_DaoGenerique {
      * @return objet :  instance de la classe métier, initialisée d'après les valeurs de l'enregistrement 
      */
     public function enregistrementVersObjet($enreg) {
-        // on instancie les objets Role et Specialite s'il y a lieu
+        // on instancie les objets AnneeScolaire et Organisation
         $lAnneeScol = null;
         if (isset($enreg['ANNEESCOL'])) {
             $daoAnneeScol = new M_DaoAnneeScol();
@@ -27,7 +27,7 @@ class M_DaoStage extends M_DaoGenerique {
             $daoOrganisation->setPdo($this->pdo);
             $lOrganisation = $daoOrganisation->getOneById($enreg['IDORGANISATION']);
         }
-
+        // on instancie les objets idEtudiant, idProf et idMaitreStage
         $idEtudiant = null;
         $idProf = null;
         $idMaitreStage = null;
@@ -40,8 +40,7 @@ class M_DaoStage extends M_DaoGenerique {
         }
 
         // on construit l'objet Stage 
-        $retour = new M_Stage(
-                $enreg['NUM_STAGE'], $lAnneeScol, $idEtudiant, $idProf, $lOrganisation, $idMaitreStage, $enreg['DATEDEBUT'], $enreg['DATEFIN'], $enreg['DATEVISITESTAGE'], $enreg['VILLE'], $enreg['DIVERS'], $enreg['BILANTRAVAUX'], $enreg['RESSOURCESOUTILS'], $enreg['COMMENTAIRES'], $enreg['PARTICIPATIONCCF']);
+        $retour = new M_Stage($enreg['NUM_STAGE'], $lAnneeScol, $idEtudiant, $idProf, $lOrganisation, $idMaitreStage, $enreg['DATEDEBUT'], $enreg['DATEFIN'], $enreg['DATEVISITESTAGE'], $enreg['VILLE'], $enreg['DIVERS'], $enreg['BILANTRAVAUX'], $enreg['RESSOURCESOUTILS'], $enreg['COMMENTAIRES'], $enreg['PARTICIPATIONCCF']);
         return $retour;
     }
 
@@ -118,10 +117,6 @@ class M_DaoStage extends M_DaoGenerique {
         $sql .= "LEFT OUTER JOIN PERSONNE P2 ON P2.IDPERSONNE = S.IDPROFESSEUR ";
         $sql .= "LEFT OUTER JOIN PERSONNE P3 ON P3.IDPERSONNE = S.IDMAITRESTAGE ";
         $sql .= "LEFT OUTER JOIN ORGANISATION O ON O.IDORGANISATION = S.IDORGANISATION ";
-
-        //var_dump($sql);
-        //die();
-
         try {
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);

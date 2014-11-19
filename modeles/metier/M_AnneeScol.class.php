@@ -7,7 +7,7 @@
  */
 class M_AnneeScol {
 
-    private $anneeScol; //type : chaîne de caractère
+    private $anneeScol; //type : String
 
     function __construct($anneeScol) {
         $this->anneeScol = $anneeScol;

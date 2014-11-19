@@ -9,19 +9,19 @@ class M_Stage {
 
     private $num; // type : int
     private $anneeScol; // objet : anneeScol
-    private $idEtudiant; // 
-    private $idProfesseur; // 
-    private $idOrganisation; // 
-    private $idMaitreStage; // 
-    private $dateDebut; // 
-    private $dateFin; // 
-    private $dateVisiteStage; // 
-    private $ville; // 
-    private $divers; // 
-    private $bilanTravaux; // 
-    private $ressourcesOutils; // 
-    private $commentaires; // 
-    private $participationCCF; // 
+    private $idEtudiant; // type : int
+    private $idProfesseur; // type : int
+    private $idOrganisation; // type : int
+    private $idMaitreStage; // type : int
+    private $dateDebut; // type : date
+    private $dateFin; // type : date
+    private $dateVisiteStage; // type : date
+    private $ville; // type : String
+    private $divers; // type : String
+    private $bilanTravaux; // type : String
+    private $ressourcesOutils; // type : String
+    private $commentaires; // type : String
+    private $participationCCF; // type : booléen
 
     function __construct($num, $anneeScol, $idEtudiant, $idProfesseur, $idOrganisation, $idMaitreStage, $dateDebut, $dateFin, $dateVisiteStage, $ville, $divers, $bilanTravaux, $ressourcesOutils, $commentaires, $participationCCF) {
         $this->num = $num;

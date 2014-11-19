@@ -10,13 +10,11 @@
     <h1>Creation d'une personne</h1>
     <!-- Choix du type de compte pour afficher les différentes informations pour créer un compte spécifique -->
     <fieldset>
-
         <legend>Type de compte</legend>
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
         <label for="role">Rôle :</label>
         <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
             <option value=""></option>
-
             <?php
             // remplissage du "SELECT" qui contient les roles
             foreach ($this->lireDonnee('lesRoles') as $role) {
@@ -24,18 +22,13 @@
             }
             ?>  
         </select>
-
     </fieldset>
-
-
-
 
     <!-- Données valables pour tous les rôles -->
     <fieldset>
         <legend>Ses informations générales</legend>
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
         <label for="civilite">Civilité; :</label>
-
         <select type="select" name="civilite" id="civilite">
             <option>Madame</option>
             <option>Monsieur</option>
@@ -53,12 +46,9 @@
     </fieldset>
 
     <!-- Information nécessaire uniquement aux étudiants -->
-
     <div id="Formulaire_Etudiant" style="display:none" height="0">
         <fieldset>
             <legend>Informations specifiques aux étudiant</legend>
-
-
             <label for="etudes">Etudes :</label>
             <input type="text" name="etudes" id="etudes"></input><br/>
             <label for="formation">Formation :</label>
@@ -67,31 +57,22 @@
             <select name ="option" id="option">
                 <option value=""></option>
                 <?
-//création du contenu du select pour les spécialités des étudiants
+                //création du contenu du select pour les spécialités des étudiants
                 foreach ($this->lireDonnee('lesSpecialites') as $spe) {
                     echo'<option value="' . $spe->getId() . '">' . $spe->getLibellecCourt() . '</option>'; //echo de la ligne 
                 }
                 ?>
             </select>
-
         </fieldset>
-
     </div>
 
-
-
-
-
     <!-- Information nécessaire uniquement aux maitre de stage -->
-
     <div id="Formulaire_MaitreStage" style="display:none" height="0">
         <fieldset>
             <legend>Choisir l'entreprise :</legend>
-
             <label for="login">Entreprise :</label>
             <select type ="select" name="entreprise1" id="entreprise1"><!--selecte de choix d'entreprise-->
                 <option value=""></option>
-
                 <?php
                 foreach ($this->lesEntreprise as $LesEntreprise) { // boucle d'affichage de toute les entreprise
                     // création d'une ligne du selecte 
@@ -99,14 +80,8 @@
                 }
                 ?>    
             </select> 
-
         </fieldset>
-
     </div>
-
-
-
-
 
     <!-- Donnée de connection des utilisateur -->
     <fieldset>
@@ -117,8 +92,8 @@
         <input type="password" name="mdp" id="mdp"></input><br/>
         <label for="mdp2">Retaper le mot de passe :</label>  <!-- vérification de mots de passe -->
         <input type="password" name="mdp2" id="mdp2"></input><br/>
-
     </fieldset>
+    
     <fieldset>
         <input type="submit" value="Creer" onclick="return valider()"></input><!-- OnClick éxécutera le JS qui testera tout les champ du formulaire. -->
         <input type="button" value="Retour" onclick="history.go(-1)">

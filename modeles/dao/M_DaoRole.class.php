@@ -14,6 +14,7 @@ class M_DaoRole extends M_DaoGenerique {
      * @return objet :  instance de la classe métier, initialisée d'après les valeurs de l'enregistrement 
      */
     public function enregistrementVersObjet($enreg) {
+        // on construit l'objet Role 
         $retour = new M_Role($enreg['IDROLE'], $enreg['RANG'], $enreg['LIBELLE']);
         return $retour;
     }

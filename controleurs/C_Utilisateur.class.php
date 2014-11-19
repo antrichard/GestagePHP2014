@@ -104,17 +104,6 @@ class C_Utilisateur extends C_ControleurGenerique {
         $professeur = $daoPers->getAllByRole('3');
         $this->vue->ecrireDonnee('lesProfesseurs', $professeur);
 
-
-//        // Mémoriser la liste des spécialités disponibles
-//        $daoSpecialite = new M_DaoSpecialite();
-//        $daoSpecialite->setPdo($pdo);
-//        $this->vue->ecrireDonnee('lesSpecialites', $daoSpecialite->getAll());
-//
-//        // Mémoriser la liste des rôles disponibles
-//        $daoRole = new M_DaoRole();
-//        $daoRole->setPdo($pdo);
-//        $this->vue->ecrireDonnee('lesRoles', $daoRole->getAll());
-
         $this->vue->ecrireDonnee('loginAuthentification', MaSession::get('login'));
         $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreAjouterStage.inc.php");
 
@@ -126,37 +115,22 @@ class C_Utilisateur extends C_ControleurGenerique {
         $this->vue->ecrireDonnee('titreVue', "Validation de la création d'une personne");
         //récupération des données
         $annee = $_POST['annee'];
-
         $organisation = $_POST['organisation'];
-
         $ville = $_POST['ville'];
-
         $dateDebut = $_POST['dateDebut'];
-
         $dateFin = $_POST['dateFin'];
-
         $dateVisite = $_POST['dateVisite'];
-
         $eleve = $_POST['eleve'];
-
         $professeur = $_POST['professeur'];
-
         $maitreStage = $_POST['maitrestage'];
-
         $divers = $_POST['divers'];
-
         $bilanTravaux = $_POST['bilanTravaux'];
-
         $ressourcesOutils = $_POST['RessourcesOutils'];
-
         $commentaire = $_POST['Commentaire'];
-
         $participationCCF = $_POST['ParticipationCCF'];
 
         //création d'un stage
         $unStage = new M_Stage(0, $annee, $eleve, $professeur, $organisation, $maitreStage, $dateDebut, $dateFin, $dateVisite, $ville, $divers, $bilanTravaux, $ressourcesOutils, $commentaire, $participationCCF);
-        //echo "Le Stage";
-        //var_dump($unStage);
         $daoStage = new M_DaoStage();
         $daoStage->connecter();
         $daoStage->insert($unStage);

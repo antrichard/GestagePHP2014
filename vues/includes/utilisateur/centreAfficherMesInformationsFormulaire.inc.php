@@ -8,11 +8,11 @@ $unUtilisateur = $this->lireDonnee('utilisateur');
     <h1>Informations personnelles</h1>
     <fieldset>
         <legend>Mes informations</legend>
-        <label for="civilite">Civilit&eacute; :</label>
+        <label for="civilite">Civilité; :</label>
         <input type="text" readonly="readonly" name="civilite" id="civilite" value="<?php echo $unUtilisateur->getCivilite(); ?>"></input><br/>
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom" readonly="readonly" value="<?php echo $unUtilisateur->getNom(); ?>"></input><br/>
-        <label for="prenom">Pr&eacute;nom :</label>
+        <label for="prenom">Prénom :</label>
         <input type="prenom" name="prenom" id="mdp" readonly="readonly" value="<?php echo $unUtilisateur->getPrenom(); ?>"></input><br/>
         <label for="mail">E-Mail :</label>
         <input type="text" name="mail" id="mail" readonly="readonly" value="<?php echo $unUtilisateur->getMail();; ?>"></input><br/>

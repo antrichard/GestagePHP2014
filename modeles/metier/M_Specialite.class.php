@@ -9,7 +9,7 @@ class M_Specialite{
     
 	private $id; // type : int
 	private $libellecCourt; // type : string
-	private $libelleLong; 
+	private $libelleLong; // type : string
         
         function __construct($id, $libellecCourt, $libelleLong) {
             $this->id = $id;

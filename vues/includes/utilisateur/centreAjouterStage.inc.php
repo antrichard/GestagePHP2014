@@ -5,23 +5,23 @@
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
-<script>
+<script> //fonction permettant d'afficher un calendrier pour le choix d'une date
     $(function() {
         $(".datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+        // adaptation du format de la date pour la base de donnée
     });
 </script>
 
 <!-- VARIABLES NECESSAIRES -->
-
 <form method="post" action=".?controleur=Utilisateur&action=validerAjoutStage" name="AjoutStage">
     <h1>Ajouter un Stage</h1>
+    
     <fieldset>
         <legend>Informations étudiant</legend>
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
         <label for="etudiant">Etudiant :</label>
         <select name="eleve" id="eleve">
             <option value=""></option>
-
             <?php
             // remplissage du "SELECT" qui contient les élèves
             foreach ($this->lireDonnee('lesEleves') as $eleve) {
@@ -29,11 +29,11 @@
             }
             ?>
         </select>
-
         <label>Année scolaire :</label>
         <select id="annee" name="annee">
             <option></option>
             <?php
+            // remplissage du "SELECT" qui contient les années scolaires
             foreach ($this->lireDonnee('lesAnneesScol') as $anneescol) {
                 echo'<option value="' . $anneescol->getAnneeScol() . '">' . $anneescol->getAnneeScol() . '</option>';
             }
@@ -46,7 +46,6 @@
         <label for="organisation">Organisation :</label>
         <select name="organisation" id="organisation">
             <option value=""></option>
-
             <?php
             // remplissage du "SELECT" qui contient les organisations
             foreach ($this->lireDonnee('lesOrganisations') as $organisation) {
@@ -54,17 +53,16 @@
             }
             ?>
         </select>
-
         <label for="ville">Ville :</label>
         <select name="ville" id="ville">
             <option></option>
             <?php
+            // remplissage du "SELECT" qui contient les villes déjà enregistrer dans la table organisation
             foreach ($this->lireDonnee('lesOrganisations') as $organisation) {
                 echo'<option value="' . $organisation->getVille() . '">' . $organisation->getVille() . '</option>';
             }
             ?>
         </select>
-
         <label for="maitrestage">Maitre de stage :</label>
         <select name="maitrestage" id="maitrestage">
             <option value=""></option>
@@ -99,13 +97,11 @@
         </select>
     </fieldset>
 
-
     <fieldset>
         <legend>Suivi</legend>
         <label for="professeur">Professeur :</label>
         <select name="professeur" id="professeur">
             <option value=""></option>
-
             <?php
             // remplissage du "SELECT" qui contient les professeurs
             foreach ($this->lireDonnee('lesProfesseurs') as $professeur) {

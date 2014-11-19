@@ -78,7 +78,6 @@ $specialite = $daoSpecialite->selectOne($idSpecialite);
     <legend>Identifiant de connexion</legend>
     <label for="login">Login :</label>
     <input type="text" readonly="readonly" name="login" id="login" value="<?php echo $login ?>"></input><br/>
-
 </fieldset>
 
 <br/>

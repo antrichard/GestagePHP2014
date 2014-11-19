@@ -14,6 +14,7 @@ class M_DaoAnneeScol extends M_DaoGenerique {
      * @return objet :  instance de la classe métier, initialisée d'après les valeurs de l'enregistrement 
      */
     public function enregistrementVersObjet($enreg) {
+        // on construit l'objet AnneeScolaire 
         $retour = new M_AnneeScol($enreg['ANNEESCOL']);
         return $retour;
     }
@@ -41,7 +42,7 @@ class M_DaoAnneeScol extends M_DaoGenerique {
     }
 
     /**
-     * 
+     * Retourne toutes les données en rapport avec l'année scolaire en paramètre
      * @param type $anneeScol
      * @return array $retour
      */
@@ -64,6 +65,10 @@ class M_DaoAnneeScol extends M_DaoGenerique {
         return $retour;
     }
 
+    /**
+     * Lire tous les enregistrements d'une table
+     * @return tableau-associatif d'objets : un tableau d'instances de la classe métier
+     */
     function getAll() {
         $retour = null;
         // Requête textuelle
@@ -89,7 +94,5 @@ class M_DaoAnneeScol extends M_DaoGenerique {
         }
         return $retour;
     }
-    
-    
-    
+
 }

@@ -6,6 +6,7 @@ $Eleve = $_POST['eleve'];
 $daoEleve = new M_DaoPersonne();
 $daoEleve->connecter();
 $Leleve = $daoEleve->getOneById($Eleve);
+//* récupération de toutes les données en rapport avec l'ID de l'élève choisi dans la page d'ajout de stage
 
 $AnneeScol = $_POST['annee'];
 
@@ -13,11 +14,13 @@ $Organisation = $_POST['organisation'];
 $daoOrganisation = new M_DaoOrganisation();
 $daoOrganisation->connecter();
 $Lorganisation = $daoOrganisation->getOneById($Organisation);
+//* récupération de toutes les données en rapport avec l'ID de l'organisation choisi dans la page d'ajout de stage
 
 $MaitreStage = $_POST['maitrestage'];
 $daoMaitreStage = new M_DaoPersonne();
 $daoMaitreStage->connecter();
 $Lemaitrestage = $daoMaitreStage->getOneById($MaitreStage);
+//* récupération de toutes les données en rapport avec l'ID du maître de stage choisi dans la page d'ajout de stage
 
 $Ville = $_POST['ville'];
 
@@ -39,6 +42,7 @@ $Professeur = $_POST['professeur'];
 $daoProfesseur = new M_DaoPersonne();
 $daoProfesseur->connecter();
 $Leprofesseur = $daoProfesseur->getOneById($Professeur);
+//* récupération de toutes les données en rapport avec l'ID du professeur choisi dans la page d'ajout de stage
 
 $DateVisite = $_POST['dateVisite'];
 ?>

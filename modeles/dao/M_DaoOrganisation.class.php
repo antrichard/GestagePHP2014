@@ -18,7 +18,6 @@ class M_DaoOrganisation extends M_DaoGenerique {
         return $retour;
     }
 
-
     /**
      * Prépare une liste de paramètres pour une requête SQL UPDATE ou INSERT
      * @param Object $objetMetier
@@ -28,15 +27,15 @@ class M_DaoOrganisation extends M_DaoGenerique {
         // construire un tableau des paramètres d'insertion ou de modification
         // l'ordre des valeurs est important : il correspond à celui des paramètres de la requête SQL
         $retour = array(
-        ':idOrganisation' => $objetMetier->getIdRole(),
-        ':nomOrganisation' => $objetMetier->getNomOrganisation(),
-        ':villeOrganisation' => $objetMetier->getVilleOrganisation(),
-        ':adresseOrganisation' => $objetMetier->getAdresseOrganisation(),
-        ':cpOrganisation' => $objetMetier->getCpOrganisation(),
-        ':telOrganisation' => $objetMetier->getTelOrganisation(),
-        ':faxOrganisation' => $objetMetier->getFaxOrganisation(),
-        ':formeJuridique' => $objetMetier->getFormeJuridique(),
-        ':activite' => $objetMetier->getActivite()
+            ':idOrganisation' => $objetMetier->getIdRole(),
+            ':nomOrganisation' => $objetMetier->getNomOrganisation(),
+            ':villeOrganisation' => $objetMetier->getVilleOrganisation(),
+            ':adresseOrganisation' => $objetMetier->getAdresseOrganisation(),
+            ':cpOrganisation' => $objetMetier->getCpOrganisation(),
+            ':telOrganisation' => $objetMetier->getTelOrganisation(),
+            ':faxOrganisation' => $objetMetier->getFaxOrganisation(),
+            ':formeJuridique' => $objetMetier->getFormeJuridique(),
+            ':activite' => $objetMetier->getActivite()
         );
         return $retour;
     }
@@ -50,8 +49,8 @@ class M_DaoOrganisation extends M_DaoGenerique {
     }
 
     /**
-     * Retourne toutes les données en rapport avec l'ID du rôle en paramètre
-     * @param type $idRole
+     * Retourne toutes les données en rapport avec l'ID de l'organisation en paramètre
+     * @param type $idOrganisation
      * @return array $retour
      */
     public function selectOne($idOrganisation) {
@@ -72,7 +71,11 @@ class M_DaoOrganisation extends M_DaoGenerique {
         }
         return $retour;
     }
-    
+
+    /**
+     * Lire tous les enregistrements d'une table
+     * @return tableau-associatif d'objets : un tableau d'instances de la classe métier
+     */
     function getAll() {
         $retour = null;
 // Requête textuelle
