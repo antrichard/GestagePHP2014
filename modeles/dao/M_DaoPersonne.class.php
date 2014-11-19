@@ -109,7 +109,7 @@ class M_DaoPersonne extends M_DaoGenerique {
             $sql = "SELECT * FROM $this->nomTable P ";
             $sql .= "LEFT OUTER JOIN SPECIALITE S ON S.IDSPECIALITE = P.IDSPECIALITE ";
             $sql .= "LEFT OUTER JOIN ROLE R ON R.IDROLE = P.IDROLE ";
-            $sql .= "WHERE IDROLE = :role";
+            $sql .= "WHERE P.IDROLE = :role";
             // préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
             // exécuter la requête avec les valeurs des paramètres (il n'y en a qu'un ici) dans un tableau
