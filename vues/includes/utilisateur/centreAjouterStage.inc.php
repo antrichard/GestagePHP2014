@@ -13,7 +13,7 @@
 
 <!-- VARIABLES NECESSAIRES -->
 
-<form method="post" action=".?controleur=Utilisateur&action=validationAjoutStage" name="AjoutStage">
+<form method="post" action=".?controleur=Utilisateur&action=validerAjoutStage" name="AjoutStage">
     <h1>Ajouter un Stage</h1>
     <fieldset>
         <legend>Informations étudiant</legend>
@@ -29,7 +29,7 @@
             }
             ?>
         </select>
-        
+
         <label>Année scolaire :</label>
         <select id="annee" name="annee">
             <option></option>
@@ -64,7 +64,7 @@
             }
             ?>
         </select>
-        
+
         <label for="maitrestage">Maitre de stage :</label>
         <select name="maitrestage" id="maitrestage">
             <option value=""></option>
@@ -84,14 +84,14 @@
     <fieldset>
         <legend>Informations complémentaire</legend>
         <label for="divers">Divers :</label>
-        <input type="text" name="divers" id="divers"></input><br/>
-        <label>Bilan des travaux:</label>
+        <input type="text" name="divers" id="divers"></input>
+        <label for="bilanTravaux">Bilan des travaux:</label>
         <input type="text" name="bilanTravaux" id="bilanTravaux"></input>
-        <label>Ressources des Outils :</label>
+        <label for="ressourcesOutils">Ressources des Outils :</label>
         <input type="text" name="RessourcesOutils" id="RessourcesOutils"></input>
-        <label>Commentaire :</label>
-        <textarea style="margin: 0px; height: 19px; width: 172px;" type="text" name="Commentaire" id="Commantaire"></textarea>
-        <label>Participation CCF :</label>
+        <label for="commentaire">Commentaire :</label>
+        <textarea style="margin: 0px; height: 19px; width: 172px;" type="text" name="Commentaire" id="Commentaire"></textarea>
+        <label for="participationCCF">Participation CCF :</label>
         <select type="select" name="ParticipationCCF" id="ParticipationCCF">
             <option></option>
             <option value="Oui">Oui</option>

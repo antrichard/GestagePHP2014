@@ -58,7 +58,7 @@ class M_DaoOrganisation extends M_DaoGenerique {
         $retour = null;
         try {
             //requete
-            $sql = "SELECT * FROM $this->nomTable WHERE idrole=" . $idOrganisation;
+            $sql = "SELECT * FROM ORGANISATION WHERE IDORGANISATION = :id";
             //préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
             //execution de la  requete

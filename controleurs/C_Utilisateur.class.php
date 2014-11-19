@@ -87,7 +87,7 @@ class C_Utilisateur extends C_ControleurGenerique {
         //récupération de la liste des élèves
         $eleve = $daoPers->getAllByRole('4');
         $this->vue->ecrireDonnee('lesEleves', $eleve);
-        
+
         //récupération de la liste des années scolaires
         $anneescol = $daoAnneeScol->getAll();
         $this->vue->ecrireDonnee('lesAnneesScol', $anneescol);
@@ -121,6 +121,52 @@ class C_Utilisateur extends C_ControleurGenerique {
         $this->vue->afficher();
     }
 
-}
+    function validerAjoutStage() {
+        $this->vue = new V_Vue("../vues/templates/template.inc.php");
+        $this->vue->ecrireDonnee('titreVue', "Validation de la création d'une personne");
+        //récupération des données
+        $annee = $_POST['annee'];
 
-?>
+        $organisation = $_POST['organisation'];
+
+        $ville = $_POST['ville'];
+
+        $dateDebut = $_POST['dateDebut'];
+
+        $dateFin = $_POST['dateFin'];
+
+        $dateVisite = $_POST['dateVisite'];
+
+        $eleve = $_POST['eleve'];
+
+        $professeur = $_POST['professeur'];
+
+        $maitreStage = $_POST['maitrestage'];
+
+        $divers = $_POST['divers'];
+
+        $bilanTravaux = $_POST['bilanTravaux'];
+
+        $ressourcesOutils = $_POST['RessourcesOutils'];
+
+        $commentaire = $_POST['Commentaire'];
+
+        $participationCCF = $_POST['ParticipationCCF'];
+
+        //création d'un stage
+        $unStage = new M_Stage(0, $annee, $eleve, $professeur, $organisation, $maitreStage, $dateDebut, $dateFin, $dateVisite, $ville, $divers, $bilanTravaux, $ressourcesOutils, $commentaire, $participationCCF);
+        //echo "Le Stage";
+        //var_dump($unStage);
+        $daoStage = new M_DaoStage();
+        $daoStage->connecter();
+        $daoStage->insert($unStage);
+        $daoStage->deconnecter();
+
+        if ($daoStage) {
+            $this->vue->ecrireDonnee('centre', "../vues/includes/utilisateur/centreValiderAjoutStage.php");
+        }
+        $this->vue->ecrireDonnee('loginAuthentification', MaSession::get("login"));
+        $this->vue->afficher();
+    }
+
+}

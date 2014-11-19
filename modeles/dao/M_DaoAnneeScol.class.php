@@ -49,11 +49,11 @@ class M_DaoAnneeScol extends M_DaoGenerique {
         $retour = null;
         try {
             //requete
-            $sql = "SELECT * FROM $this->nomTable WHERE anneeScol=" . $anneeScol;
+            $sql = "SELECT * FROM $this->nomTable WHERE anneeScol= :annee";
             //préparer la requête PDO
             $queryPrepare = $this->pdo->prepare($sql);
             //execution de la  requete
-            if ($queryPrepare->execute(array(':id' => $anneeScol))) {
+            if ($queryPrepare->execute(array(':annee' => $anneeScol))) {
                 // si la requete marche
                 $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
                 $retour = $this->enregistrementVersObjet($enregistrement);
