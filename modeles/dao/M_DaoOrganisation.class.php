@@ -72,6 +72,7 @@ class M_DaoOrganisation extends M_DaoGenerique {
         }
         return $retour;
     }
+    
     function getAll() {
         $retour = null;
 // Requête textuelle

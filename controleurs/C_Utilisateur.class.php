@@ -79,17 +79,30 @@ class C_Utilisateur extends C_ControleurGenerique {
         // ... depuis la BDD       
         $daoPers = new M_DaoPersonne();
         $daoPers->connecter();
-        $eleve = $daoPers->getAllByRole('4');
-
-        //$daoPers->setPdo($pdo);
-        $this->vue->ecrireDonnee('lesEleves', $eleve);
-        
-        
+        $daoAnneeScol = new M_DaoAnneeScol();
+        $daoAnneeScol->connecter();
         $daoOrga = new M_DaoOrganisation();
         $daoOrga->connecter();
-        $organisation = $daoOrga->getAll();
 
+        //récupération de la liste des élèves
+        $eleve = $daoPers->getAllByRole('4');
+        $this->vue->ecrireDonnee('lesEleves', $eleve);
+        
+        //récupération de la liste des années scolaires
+        $anneescol = $daoAnneeScol->getAll();
+        $this->vue->ecrireDonnee('lesAnneesScol', $anneescol);
+
+        //récupération de la liste des organisations
+        $organisation = $daoOrga->getAll();
         $this->vue->ecrireDonnee('lesOrganisations', $organisation);
+
+        //récupération de la liste des maîtres de stage
+        $maitrestage = $daoPers->getAllByRole('5');
+        $this->vue->ecrireDonnee('lesMaitresStage', $maitrestage);
+
+        //récupération de la liste des maîtres de stage
+        $professeur = $daoPers->getAllByRole('3');
+        $this->vue->ecrireDonnee('lesProfesseurs', $professeur);
 
 
 //        // Mémoriser la liste des spécialités disponibles

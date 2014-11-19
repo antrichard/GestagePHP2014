@@ -1,87 +1,92 @@
-<!-- cette page s'affiche lors de la réussite de la création d'une personne-->
+<!-- cette page s'affiche lors de la réussite de l'ajout du stage-->
 
-<!--récupération des données de l'utilisateur créé-->
+<!--récupération des données du stage ajouté-->
 <?php
-$idRole = $_POST['role'];
+$Eleve = $_POST['eleve'];
+$daoEleve = new M_DaoPersonne();
+$daoEleve->connecter();
+$Leleve = $daoEleve->getOneById($Eleve);
+$daoEleve->deconnecter();
+$AnneeScol = $_POST['annee'];
 
-$role = new M_Role(null, null, null);
+$Organisation = $_POST['organisation'];
+$daoOrganisation = new M_DaoOrganisation();
+$daoOrganisation->connecter();
+$Lorganisation = $daoOrganisation->getOneById($Organisation);
+$daoOrganisation->deconnecter();
 
-$daoRole = new M_DaoRole();
-$daoRole->connecter();
-$pdo = $daoRole->getPdo();
-$role = $daoRole->selectOne($idRole);
-//* récupération de toutes les données en rapport avec l'ID du rôle choisi dans la page de création d'une personne
+$MaitreStage = $_POST['maitrestage'];
+$daoMaitreStage = new M_DaoPersonne();
+$daoMaitreStage->connecter();
+$Lemaitrestage = $daoMaitreStage->getOneById($MaitreStage);
+$daoMaitreStage->deconnecter();
 
-$civilite = $_POST['civilite'];
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$mail = $_POST['mail'];
-$numTel = $_POST['tel'];
-$mobile = $_POST['telP'];
-$etudes = $_POST['etudes'];
-$formation = $_POST['formation'];
+if ($_POST['ville'] === "insertVille") {
+    $Ville = $_POST['ajoutVille'];
+} else {
+    $Ville = $_POST['ville'];
+}
 
-$login = $_POST['login'];
-$mdp = sha1($_POST['mdp']);
+$DateDebut = $_POST['dateDebut'];
+$DateFin = $_POST['dateFin'];
 
-$specialite = new M_Specialite(null, null, null);
+$Divers = $_POST['divers'];
+$BilanTravaux = $_POST['bilanTravaux'];
+$RessourcesOutils = $_POST['RessourcesOutils'];
+$Commantaire = $_POST['Commantaire'];
+$ParticipationCCF = $_POST['ParticipationCCF'];
 
-$idSpecialite = $_POST['option'];
+$Professeur = $_POST['professeur'];
+$daoProfesseur = new M_DaoPersonne();
+$daoProfesseur->connecter();
+$Leprofesseur = $daoProfesseur->getOneById($Professeur);
+$daoProfesseur->deconnecter();
 
-$daoSpecialite = new M_DaoSpecialite();
-$daoSpecialite->connecter();
-$pdo = $daoSpecialite->getPdo();
-$specialite = $daoSpecialite->selectOne($idSpecialite);
-//* récupération de toutes les données en rapport avec l'ID de la spécialité choisie dans la page de création d'une personne
+$DateVisite = $_POST['dateVisite'];
 ?>
 
-<h1>La personne a bien été créée</h1>
+<h1>Le stage a bien été ajouté</h1>
 
-<h2>Récapitulatif de ses informations personnelles</h2>
+<h2>Récapitulatif des informations</h2>
 
 <fieldset>
-    <legend>Type de compte</legend>
-    <label for="role">Rôle :</label>
-    <input type="text" readonly="readonly" name="role" id="role" value="<?php echo $role->getLibelle() ?>"></input><br/>
+    <legend>Informations étudiant</legend>
+    <label for="etudiant">Etudiant :</label>
+    <input type="text" readonly="readonly" name="eleve" id="eleve" value="<?php echo $Eleve->getNom() . ' ' . $Eleve->getPrenom() ?>"></input><br/>
+    <label for="anneescol">Année Scolaire :</label>
+    <input type="text" readonly="readonly" name="annee" id="annee" value="<?php echo $AnneeScol ?>"></input><br/>
 </fieldset>
 
 
 <fieldset>
-    <legend>Ses informations</legend>
-    <label for="civilite">Civilité :</label>
-    <input type="text" readonly="readonly" name="civilite" id="civilite" value="<?php echo $civilite ?>"></input><br/>
-    <label for="nom">Nom :</label>
-    <input type="text" name="nom" id="nom" readonly="readonly" value="<?php echo $nom ?>"></input><br/>
-    <label for="prenom">Prénom :</label>
-    <input type="prenom" name="prenom" id="mdp" readonly="readonly" value="<?php echo $prenom ?>"></input><br/>
-    <label for="mail">E-Mail :</label>
-    <input type="text" name="mail" id="mail" readonly="readonly" value="<?php echo $mail ?>"></input><br/>
-    <label for="tel">Tel :</label>
-    <input type="text" name="tel" id="tel" readonly="readonly" value="<?php echo $numTel ?>"></input><br/>
-    <label for="tel">Tel portable:</label>
-    <input type="text" name="telP" id="telP" readonly="readonly" value="<?php echo $mobile ?>"></input><br/>
+    <legend>Informations stage</legend>
+    <label for="organisation">Organisation :</label>
+    <input type="text" readonly="readonly" name="organisation" id="organisation" value="<?php echo $Organisation->getNom() ?>"></input><br/>
+    <label for="ville">Ville :</label>
+    <input type="text" readonly="readonly" name="ville" id="ville" value="<?php echo $Organisation->getVille() ?>"></input><br/>
+    <label for="maitrestage">Maitre de stage :</label>
+    <input type="text" readonly="readonly" name="maitrestage" id="maitrestage" value="<?php echo $MaitreStage->getNom() . ' ' . $MaitreStage->getPrenom() ?>"></input><br/>
+    <label for="datedebut">Date debut :</label>
+    <input type="text" readonly="readonly" name="datedebut" id="datedebut" value="<?php echo $DateDebut ?>"></input><br/>
+    <label for="datefin">Date fin :</label>
+    <input type="text" readonly="readonly" name="datefin" id="datefin" value="<?php echo $DateFin ?>"></input><br/>
 </fieldset>
 
-
 <fieldset>
-    <legend>Informations spécifiques à l'étudiant</legend>
-    <label for="etudes">Etudes :</label>
-    <input type="text" readonly="readonly" name="etudes" id="etudes" value="<?php echo $etudes ?>"></input><br/>
-    <label for="formation">Formation :</label>
-    <input type="text" readonly="readonly" name="formation" id="formation" value="<?php echo $formation ?>"></input><br/>
-    <label for="option">Specialité :</label>
-    <input type="text" readonly="readonly" name="specialite" id="specialite" value="<?php echo $specialite->getLibellecCourt() ?>"></input><br/>
+    <legend>Informations complémentaire</legend>
+    <label for="divers">Divers :</label>
+    <input type="text" readonly="readonly" name="divers" id="divers" value="<?php echo $Divers ?>"></input><br/>
+
 </fieldset>
 
-
 <fieldset>
-    <legend>Identifiant de connexion</legend>
-    <label for="login">Login :</label>
-    <input type="text" readonly="readonly" name="login" id="login" value="<?php echo $login ?>"></input><br/>
-
+    <legend>Suivi</legend>
+    <label for="professeur">Professeur :</label>
+    <input type="text" readonly="readonly" name="professeur" id="professeur" value="<?php echo $Professeur->getNom() . ' ' . $Professeur->getPrenom() ?>"></input><br/>
+    <label for="datevisite">Date visite :</label>
+    <input type="text" readonly="readonly" name="datevisite" id="datevisite" value="<?php echo $DateVisite ?>"></input><br/>
 </fieldset>
 
 <br/>
-
-<input type="button" value="Retour à la page de création d'un utlisateur" onclick="gotoUrl('.?controleur=AdminPersonnes&action=creerPersonne')">
+<input type="button" value="Retour à la page d'ajout d'un stage" onclick="gotoUrl('.?controleur=utilisateur&action=ajoutStage')">
 <br/>
