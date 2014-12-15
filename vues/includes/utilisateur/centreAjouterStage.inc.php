@@ -15,13 +15,13 @@
 <!-- VARIABLES NECESSAIRES -->
 <form method="post" action=".?controleur=Utilisateur&action=validerAjoutStage" name="AjoutStage">
     <h1>Ajouter un Stage</h1>
-    
+
     <fieldset>
         <legend>Informations étudiant</legend>
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
         <label for="etudiant">Etudiant :</label>
         <select name="eleve" id="eleve">
-            <option value=""></option>
+            <option>Choisissez un étudiant</option>
             <?php
             // remplissage du "SELECT" qui contient les élèves
             foreach ($this->lireDonnee('lesEleves') as $eleve) {
@@ -31,7 +31,7 @@
         </select>
         <label>Année scolaire :</label>
         <select id="annee" name="annee">
-            <option></option>
+            <option>Sélectionnez l'année scolaire</option>
             <?php
             // remplissage du "SELECT" qui contient les années scolaires
             foreach ($this->lireDonnee('lesAnneesScol') as $anneescol) {
@@ -45,7 +45,7 @@
         <legend>Informations stage</legend>
         <label for="organisation">Organisation :</label>
         <select name="organisation" id="organisation">
-            <option value=""></option>
+            <option>Sélectionnez une organisation</option>
             <?php
             // remplissage du "SELECT" qui contient les organisations
             foreach ($this->lireDonnee('lesOrganisations') as $organisation) {
@@ -55,7 +55,7 @@
         </select>
         <label for="ville">Ville :</label>
         <select name="ville" id="ville">
-            <option></option>
+            <option>Sélectionnez une ville</option>
             <?php
             // remplissage du "SELECT" qui contient les villes déjà enregistrer dans la table organisation
             foreach ($this->lireDonnee('lesOrganisations') as $organisation) {
@@ -65,7 +65,7 @@
         </select>
         <label for="maitrestage">Maitre de stage :</label>
         <select name="maitrestage" id="maitrestage">
-            <option value=""></option>
+            <option>Choisissez un maître de stage</option>
             <?php
             // remplissage du "SELECT" qui contient les maîtres de stage
             foreach ($this->lireDonnee('lesMaitresStage') as $maitrestage) {
@@ -91,7 +91,6 @@
         <textarea style="margin: 0px; height: 19px; width: 172px;" type="text" name="Commentaire" id="Commentaire"></textarea>
         <label for="participationCCF">Participation CCF :</label>
         <select type="select" name="ParticipationCCF" id="ParticipationCCF">
-            <option></option>
             <option value="Oui">Oui</option>
             <option value="Non">Non</option>
         </select>
@@ -101,7 +100,7 @@
         <legend>Suivi</legend>
         <label for="professeur">Professeur :</label>
         <select name="professeur" id="professeur">
-            <option value=""></option>
+            <option>Choisissez un professeur</option>
             <?php
             // remplissage du "SELECT" qui contient les professeurs
             foreach ($this->lireDonnee('lesProfesseurs') as $professeur) {

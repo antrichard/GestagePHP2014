@@ -1,10 +1,12 @@
 <?php
+
 /**
  * Description of M_Personne
  *
  * @author btssio
  */
 class M_Personne {
+
     private $id; //type : int
     private $role; //objet Role
     private $specialite; //objet Specialite
@@ -35,8 +37,6 @@ class M_Personne {
         $this->mdp = $mdp;
     }
 
-
-    
     public function getId() {
         return $this->id;
     }
@@ -44,7 +44,7 @@ class M_Personne {
     public function getSpecialite() {
         return $this->specialite;
     }
-    
+
     public function getRole() {
         return $this->role;
     }
@@ -88,8 +88,8 @@ class M_Personne {
     public function getMdp() {
         return $this->mdp;
     }
-    
-   public function setId($id) {
+
+    public function setId($id) {
         $this->id = $id;
     }
 
@@ -141,5 +141,4 @@ class M_Personne {
         $this->mdp = $mdp;
     }
 
-    
 }

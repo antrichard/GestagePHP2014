@@ -116,9 +116,13 @@ class M_DaoPersonne extends M_DaoGenerique {
             if ($queryPrepare->execute(array(':role' => $idrole))) {
                 // si la requête réussit :
                 // extraire l'enregistrement retourné par la requête
-                $enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC);
                 // construire l'objet métier correspondant
-                $retour = $this->enregistrementVersObjet($enregistrement);
+                while ($enregistrement = $queryPrepare->fetch(PDO::FETCH_ASSOC)) {
+// construir un objet métier correspondant
+                    $unObjetMetier = $this->enregistrementVersObjet($enregistrement);
+// ajouter l'objet au tableau
+                    $retour[] = $unObjetMetier;
+                }
             }
         } catch (PDOException $e) {
             echo get_class($this) . ' - ' . __METHOD__ . ' : ' . $e->getMessage();
