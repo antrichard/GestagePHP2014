@@ -1,7 +1,7 @@
 <?php
 //connection à la base de donnée 
 $db=mysql_connect('localhost','root','joliverie');
-mysql_select_db('GESTAGE',$db);
+mysql_select_db('arichard_gestage',$db);
 //instantiation des variable
 $requet='';
 $chaine='';

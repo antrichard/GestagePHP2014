@@ -1,7 +1,7 @@
 <?php
     // connection à la base de donées
     $db=mysql_connect('localhost','root','joliverie');
-    mysql_select_db('GESTAGE',$db);
+    mysql_select_db('arichard_gestage',$db);
     //instentiation des donnée
     $chaine='';
     //récupération des donnée envoyer par jQuery

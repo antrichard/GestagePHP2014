@@ -14,7 +14,7 @@
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
         <label for="role">Rôle :</label>
         <select OnChange="javascript:choixRole();"  name="role" id="role"><!-- le OnChange exécute la fonction qui affichera ou non le formulaire etudiant -->
-            <option value=""></option>
+            <option value="">Sélectionnez un type de compte</option>
             <?php
             // remplissage du "SELECT" qui contient les roles
             foreach ($this->lireDonnee('lesRoles') as $role) {
@@ -28,10 +28,11 @@
     <fieldset>
         <legend>Ses informations générales</legend>
         <input type="hidden" readonly="readonly" name="id" id="id"></input>
-        <label for="civilite">Civilité; :</label>
+        <label for="civilite">Civilité :</label>
         <select type="select" name="civilite" id="civilite">
-            <option>Madame</option>
-            <option>Monsieur</option>
+            <option value="">Sélectionnez une civilté</option>
+            <option value="Madame">Madame</option>
+            <option value="Monsieur">Monsieur</option>
         </select>
         <label for="nom">Nom :</label>
         <input type="text" name="nom" id="nom"></input><br/>
@@ -41,25 +42,45 @@
         <input type="text" name="mail" id="mail"></input><br/>
         <label for="tel">Tel :</label>
         <input type="text" name="tel" id="tel"></input><br/>
-        <label for="tel">Tel portable:</label>
+        <label for="telP">Tel portable:</label>
         <input type="text" name="telP" id="telP"></input><br/>
     </fieldset>
 
     <!-- Information nécessaire uniquement aux étudiants -->
     <div id="Formulaire_Etudiant" style="display:none" height="0">
         <fieldset>
-            <legend>Informations specifiques aux étudiant</legend>
+            <legend>Informations spécifiques à l'étudiant</legend>
             <label for="etudes">Etudes :</label>
             <input type="text" name="etudes" id="etudes"></input><br/>
             <label for="formation">Formation :</label>
             <input type="text" name="formation" id="formation"></input><br/>
             <label for="option">Specialité :</label>
             <select name ="option" id="option">
-                <option value=""></option>
+                <option value="">Sélectionnez une spécialité</option>
                 <?
                 //création du contenu du select pour les spécialités des étudiants
                 foreach ($this->lireDonnee('lesSpecialites') as $spe) {
                     echo'<option value="' . $spe->getId() . '">' . $spe->getLibellecCourt() . '</option>'; //echo de la ligne 
+                }
+                ?>
+            </select>
+            <label for="classe">Classe :</label>
+            <select name ="classe" id="classe">
+                <option value="">Sélectionnez une classe</option>
+                <?
+                //création du contenu du select pour les classes d'étudiants
+                foreach ($this->lireDonnee('lesClasses') as $classe) {
+                    echo'<option value="' . $classe->getNumClasse() . '">' . $classe->getNumClasse() . '</option>'; //echo de la ligne 
+                }
+                ?>
+            </select>
+            <label for="anneeScol">Année Scolaire :</label>
+            <select name ="anneeScol" id="anneeScol">
+                <option value="">Sélectionnez une année scolaire</option>
+                <?
+                //création du contenu du select pour les années scolaires
+                foreach ($this->lireDonnee('lesAnneeScol') as $anneeScol) {
+                    echo'<option value="' . $anneeScol->getAnneeScol() . '">' . $anneeScol->getAnneeScol() . '</option>'; //echo de la ligne 
                 }
                 ?>
             </select>
@@ -69,21 +90,24 @@
     <!-- Information nécessaire uniquement aux maitre de stage -->
     <div id="Formulaire_MaitreStage" style="display:none" height="0">
         <fieldset>
-            <legend>Choisir l'entreprise :</legend>
-            <label for="login">Entreprise :</label>
-            <select type ="select" name="entreprise1" id="entreprise1"><!--selecte de choix d'entreprise-->
-                <option value=""></option>
+            <legend>Informations spécifiques du professionnel :</legend>
+            <label for="organisation">Organisation :</label>
+            <select name="organisation" id="organisation">
+                <option value="">Sélectionnez une organisation</option>
                 <?php
-                foreach ($this->lesEntreprise as $LesEntreprise) { // boucle d'affichage de toute les entreprise
-                    // création d'une ligne du selecte 
-                    echo'<option value="' . $LesEntreprise->IDORGANISATION . '">' . $LesEntreprise->NOM_ORGANISATION . '</option>';
+                //création du contenu du select pour les organisations
+                foreach ($this->lireDonnee('lesOrganisations') as $organisation) {
+                    // création d'une ligne du select 
+                    echo'<option value="' . $organisation->getId() . '">' . $organisation->getNom() . '</option>';
                 }
                 ?>    
-            </select> 
+            </select>
+            <label for="fonction">Fonction :</label>
+            <input type="text" name="fonction" id="fonction"></input><br/>
         </fieldset>
     </div>
 
-    <!-- Donnée de connection des utilisateur -->
+    <!-- Donnée de connexion des utilisateur -->
     <fieldset>
         <legend>Ses identifiants de connexion</legend>
         <label for="login">Login :</label>
@@ -93,9 +117,9 @@
         <label for="mdp2">Retaper le mot de passe :</label>  <!-- vérification de mots de passe -->
         <input type="password" name="mdp2" id="mdp2"></input><br/>
     </fieldset>
-    
+
     <fieldset>
-        <input type="submit" value="Creer" onclick="return valider()"></input><!-- OnClick éxécutera le JS qui testera tout les champ du formulaire. -->
+        <input type="submit" value="Creer" onclick="return valider()"></input><!-- OnClick exécutera le JS qui testera tout les champ du formulaire. -->
         <input type="button" value="Retour" onclick="history.go(-1)">
     </fieldset>
 </form>
