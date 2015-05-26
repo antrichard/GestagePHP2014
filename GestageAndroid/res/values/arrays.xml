@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="classes"></string-array>
+    <string-array name="anneeScol"></string-array>
+    <string-array name="eleves"></string-array>
+    
+</resources>
